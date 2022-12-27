@@ -1,4 +1,9 @@
 from collections import deque
+import sys
+sys.setrecursionlimit(3*10**5)
+if "pypyjit" in sys.builtin_module_names:
+	import pypyjit
+	pypyjit.set_param("max_unroll_recursion=-1")
 
 n=int(input())
 seen=[False]*n
