@@ -1,31 +1,26 @@
 h,w=map(int,input().split())
-cumsum = [[[0,0] for i in range(w)]  for i in range(h)]
-# for i in range(h):
-# 	for j in range(w):
-# 		cumsum[i][j]=[i,j]
-a=[list(input()) for i in range(h)]
+A=[list(input()) for i in range(h)]
 q=int(input())
+x=[0,1]
+y=[0,1]
 for i in range(q):
-	x,y=map(int,input().split())
-	cumsum[0][0][0]+=x-1
-	cumsum[0][0][1]+=y-1
-	cumsum[x][0][0]+=h
-	cumsum[0][y][1]+=w
-for i in range(h):
-	for j in range(w-1):
-		cumsum[i][j+1][1] += cumsum[i][j][1]-2*q
-for i in range(w):
-	for j in range(h-1):
-		cumsum[j+1][i][0] += cumsum[j][i][0]-2*q
-for i in range(h):
-	for j in range(w-1):	
-		cumsum[i][j+1][0] = cumsum[i][j][0]
-for i in range(w):
-	for j in range(h-1):
-		cumsum[j+1][i][1] = cumsum[j][i][1]
-print(cumsum)
+	a,b=map(int,input().split())
+	for j in range(2):
+		if x[j]<a:
+			x[j]=a-x[j]-1
+		else:
+			x[j]=h+a-x[j]-1
+	for j in range(2):
+		if y[j]<b:
+			y[j]=b-y[j]-1
+		else:
+			y[j]=w+b-y[j]-1
+x[1]=1 if (x[0]+1)%h==x[1]%h else -1
+y[1]=1 if (y[0]+1)%w==y[1]%w else -1
+print(x)
+print(y)
 for i in range(h):
 	ans=[]
 	for j in range(w):
-		ans.append(a[i+cumsum[i][j][0]][j+cumsum[i][j][1]])
+		ans.append(A[(-x[1]*x[0]+i*x[1])%h][(-y[1]*y[0]+j*y[1])%w])
 	print(''.join(ans))
