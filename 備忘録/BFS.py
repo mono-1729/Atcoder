@@ -1,13 +1,11 @@
 from collections import deque
 #計算量：O（V+E）
-N = int(input())
-E = [[] for _ in range(N)]
-for _ in range(N-1):
-    A, B = map(int, input().split())
-    E[A-1].append(B-1)
-    E[B-1].append(A-1)
- 
- 
+n = int(input())
+e = [[] for _ in range(n)]
+for _ in range(n-1):
+    a,b = map(int, input().split())
+    e[a-1].append(b-1)
+    e[b-1].append(a-1)
 def bfs(s):
     dist = [None]*N
     que = deque([s])
@@ -15,9 +13,9 @@ def bfs(s):
     while que:
         v = que.popleft()
         d = dist[v]
-        for w in E[v]:
+        for w in e[v]:
             if dist[w] is not None:
-                continue
+                continue  
             dist[w] = d + 1
             que.append(w)
     d = max(dist)
@@ -78,7 +76,7 @@ que.append((si, sj))
  
 while len(que) > 0:
     i, j = que.popleft()
-    
+
     # 4方向の遷移
     for i2, j2 in ((i+1, j), (i-1, j), (i, j+1), (i, j-1)):
         if not (0 <= i2 < H and 0 <= j2 < W):
@@ -86,7 +84,7 @@ while len(que) > 0:
         # この経路での始点から遷移先までの距離。壁なら+1
         wall = (C[i][j] == '#')
         d = dist[i][j] + wall
- 
+
         # 暫定距離より短い経路が得られた場合は更新して、+1なら後ろに、+0なら前に付ける
         if d < dist[i2][j2]:
             dist[i2][j2] = d
