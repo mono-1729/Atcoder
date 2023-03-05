@@ -1,7 +1,5 @@
-import time
-now=time.time()
 from collections import deque
-gx,gy=0,0
+#gx,gy=map(int,input().split())
 sx,sy=(300,300)
 dist=[[10**9 for _ in range(601)]for _ in range(601)]
 dist[sx][sy] = 0
@@ -15,5 +13,6 @@ while len(que) > 0:
 		if d < dist[x2][y2]:
 			dist[x2][y2] = d
 			que.append((x2, y2)) 
-print(dist[gx+300][gy+300])
-print(time.time()-now)
+#print(dist[gx+300][gy+300])
+for i in range(-2,3):
+	print(list(dist[i+300][j+300] for j in range(-2,3)))
