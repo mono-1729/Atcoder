@@ -20,11 +20,12 @@ def dijkstra(edges, num_node, Goal):
 
     while len(node_name) > 0:
         #ヒープから取り出し
-        _, min_point = heapq.heappop(node_name)
+        cc, min_point = heapq.heappop(node_name)
         last = min_point[-1]
         if last == Goal:
             return min_point, node  #道順とコストを出力させている
-
+        if node[min_point[-1]]<cc:
+            continue
         #経路の要素を各変数に格納することで，視覚的に見やすくする
         for factor in edges[last]:
             goal = factor[0]   #終点
@@ -90,8 +91,9 @@ def dijkstra(edges, num_node):
 
     while len(node_name) > 0:
         #ヒープから取り出し
-        _, min_point = heapq.heappop(node_name)
-
+        cc, min_point = heapq.heappop(node_name)
+        if node[min_point]<cc:
+            continue
         #経路の要素を各変数に格納することで，視覚的に見やすくする
         for factor in edges[min_point]:
             goal = factor[0]   #終点
