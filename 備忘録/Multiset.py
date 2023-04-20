@@ -1,3 +1,5 @@
+#https://qiita.com/toast-uz/items/a63f2d57ec7321186f12
+
 import bisect
 
 class BIT:

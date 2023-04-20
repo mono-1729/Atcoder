@@ -69,7 +69,7 @@ class LazySegTree_RAQ:
             l >>= 1
             r >>= 1
         return res
-    
+
 #区間更新用
 
 def segfunc(x,y):
