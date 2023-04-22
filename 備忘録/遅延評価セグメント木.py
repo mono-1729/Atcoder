@@ -198,6 +198,20 @@ class SegTree:
             self.tree[k >> 1] = self.segfunc(self.tree[k], self.tree[k ^ 1])
             k >>= 1
 
+
+    def add(self, k, x):
+        """
+        k番目の値に1加算
+        k: index(0-index)
+        x: update value
+        """
+        k += self.num
+        self.tree[k] += 1
+        while k > 1:
+            self.tree[k >> 1] = self.segfunc(self.tree[k], self.tree[k ^ 1])
+            k >>= 1
+
+
     def query(self, l, r):
         """
         [l, r)のsegfuncしたものを得る
