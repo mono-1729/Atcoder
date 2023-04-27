@@ -1,3 +1,5 @@
+# https://qiita.com/takayg1/items/c811bd07c21923d7ec69
+
 #  区間加算用
 
 def segfunc(x,y):
@@ -201,12 +203,12 @@ class SegTree:
 
     def add(self, k, x):
         """
-        k番目の値に1加算
+        k番目の値にx加算
         k: index(0-index)
         x: update value
         """
         k += self.num
-        self.tree[k] += 1
+        self.tree[k] += x
         while k > 1:
             self.tree[k >> 1] = self.segfunc(self.tree[k], self.tree[k ^ 1])
             k >>= 1
