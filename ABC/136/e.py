@@ -16,11 +16,11 @@ for i in nums:
 	c2=n-1
 	for j in range(n):
 		if count1 < count2:
-			count1 += a[c1]%i
+			count1 += x[c1]
 			c1 += 1
 		else:
-			count1 += i-a[c2]%i
+			count2 += i-x[c2]
 			c2-=1
-	if min(count2,count1)<=k:
+	if max(count2,count1)<=k:
 		ans=max(ans,i)
 print(ans)
