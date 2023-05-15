@@ -102,7 +102,7 @@ class SortedSet(Generic[T]):
                 return a[bisect_left(a, x)]
     
     def __getitem__(self, x: int) -> T:
-        "Return the x-th element, or IndexError if it doesn't exist."
+        "Return the x-th element, or IndexError if it doesn't exist.(0-indexed)"
         if x < 0: x += self.size
         if x < 0: raise IndexError
         for a in self.a:
