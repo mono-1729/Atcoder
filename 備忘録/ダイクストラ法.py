@@ -80,9 +80,6 @@ if __name__ == '__main__':
 import heapq
 
 def dijkstra(edges, num_node):
-    """ 経路の表現
-            [終点, 辺の値]
-            A, B, C, D, ... → 0, 1, 2, ...とする """
     node = [float('inf')] * num_node    #スタート地点以外の値は∞で初期化
     node[0] = 0     #スタートは0で初期化
 
