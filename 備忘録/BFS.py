@@ -25,6 +25,8 @@ def bfs(s):
 u, _ = bfs(0)
 v, d = bfs(u)
 print(d+1)
+
+
 #01BFS
 from collections import deque
 
