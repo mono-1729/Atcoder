@@ -1,4 +1,4 @@
-from itertools import*
+from itertools import *
 n,m=map(int,input().split())
 s=[list(input()) for i in range(n)]
 nums=[i for i in range(n)]
