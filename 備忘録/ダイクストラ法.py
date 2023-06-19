@@ -84,7 +84,7 @@ def dijkstra(edges, num_node):
     node[0] = 0     #スタートは0で初期化
 
     node_name = []
-    heapq.heappush(node_name, [0, 0])
+    heapq.heappush(node_name, (0, 0))
 
     while len(node_name) > 0:
         #ヒープから取り出し
@@ -100,7 +100,7 @@ def dijkstra(edges, num_node):
             if node[min_point] + cost < node[goal]:
                 node[goal] = node[min_point] + cost     #更新
                 #ヒープに登録
-                heapq.heappush(node_name, [node[min_point] + cost, goal])
+                heapq.heappush(node_name, (node[min_point] + cost, goal))
 
     return node
 

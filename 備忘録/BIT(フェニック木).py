@@ -5,7 +5,7 @@ class BIT:
 		self.size = N
 		self.bit = [0]*(N+1)
 
-	# i番目までの和を求める
+	# i番目までの和を求める(iは1-indexed)
 	def sum(self, i):
 		res = 0
 		while i > 0:
@@ -13,7 +13,7 @@ class BIT:
 			i -= -i & i # 最も右にある1の桁を0にする
 		return res
 
-	# i番目の値にxを足して更新する
+	# i番目の値にxを足して更新する(iは1-indexed)
 	def add(self, i, x):
 		while i <= self.size:
 			self.bit[i] += x # フェニック木のi番目にxを足して更新
