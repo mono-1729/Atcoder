@@ -1,38 +1,29 @@
 n=int(input())
 t=list(input())
 mod=998244353
-fact=[1 for _ in range(2*n+1)]
-inv=[1 for _ in range(2*n+1)]
-factinv=[1 for _ in range(2*n+1)]
-for i in range(2,2*n+1):
-	fact[i]=(fact[i-1]*i)%mod
-	inv[i]=(-inv[mod%i]*(mod//i))%mod
-	factinv[i]=(factinv[i-1]*inv[i])%mod
-   
-def nCk(n,k):
-	if n<0 or k<0 or k>n: return 0
-	return (fact[n]*factinv[n-k]*factinv[k])%mod
-pcount=0
-mcount=0
-qcount=0
-prob=[[0,0] for i in range(2*n)]
-for i in range(2*n):
-	if t[i]=='+':
-		pcount+=1
-	if t[i]=='-':
-		mcount+=1
-	if t[i]=='?':
-		qcount+=1
-for i in range(2*n):
-	
-	prob[i][1]=mod+1-prob[i][0]
-dp=[0]*(2*n)
-dp2=[]
-ans=0
-for i in range(1,2*n,2):
-	for j in range(0,2*n-i):
-		ans+=(1+mod-dp[i])
-
-                
-ans=(ans*nCk(qcount,n-pcount))
-print(ans)
+dp=[[[0,0]for i in range(n+1)] for i in range(n+1)]
+dp[0][0]=[0,1]
+for i in range(1,2*n+1):
+	if t[i-1]=='+':
+		for j in range(1,i+1):
+			if max(j,i-j)>n or dp[j-1][i-j][1]==0:
+				continue
+			dp[j][i-j][0]=(dp[j-1][i-j][0]+abs(i-2*j)*dp[j-1][i-j][1])%mod
+			dp[j][i-j][1]=dp[j-1][i-j][1]
+	if t[i-1]=='-':
+		for j in range(1,i+1):
+			if max(j,i-j)>n or dp[i-j][j-1][1]==0:
+				continue
+			dp[i-j][j][0]=(dp[i-j][j-1][0]+abs(i-2*j)*dp[i-j][j-1][1])%mod
+			dp[i-j][j][1]=dp[i-j][j-1][1]
+	if t[i-1]=='?':
+		for j in range(1,i+1):
+			if max(j,i-j)<=n and dp[j-1][i-j][1]!=0:
+				dp[j][i-j][0]+=dp[j-1][i-j][0]+abs(i-2*j)*dp[j-1][i-j][1]
+				dp[j][i-j][1]=(dp[j][i-j][1]+dp[j-1][i-j][1])%mod
+				dp[j][i-j][0]%=mod
+			if max(j,i-j)<=n and dp[i-j][j-1][1]!=0:
+				dp[i-j][j][0]+=dp[i-j][j-1][0]+abs(i-2*j)*dp[i-j][j-1][1]
+				dp[i-j][j][1]=(dp[i-j][j][1]+dp[i-j][j-1][1])%mod
+				dp[i-j][j][1]%=mod
+print(dp[n][n][0])
